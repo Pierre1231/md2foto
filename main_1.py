@@ -10,7 +10,6 @@ Description:
 
 import sys
 import os
-import markdown
 import imgkit
 
 import shutil
@@ -21,7 +20,6 @@ from PyQt6.QtGui import QPixmap
 from PIL import Image
 import chromedriver_autoinstaller
 import markdown2
-from pymdownx import superfences
 
 extensions = [
     'extra',  # 表格、脚注等扩展
@@ -110,14 +108,14 @@ class MarkdownToImageApp(QWidget):
             html_content = markdown2.markdown(markdown_text, extras=extensions)
 
             # 加载模板文件
-            with open("template.html", "r", encoding="utf-8") as template_file:
+            with open("front_end/template1.html", "r", encoding="utf-8") as template_file:
                 html_template = template_file.read()
 
             # 将 Markdown 渲染后的 HTML 内容插入模板
             html_template = html_template.replace("{{content}}", html_content)
 
             # 将新的 HTML 文件保存成临时文件，若文件已存在则覆盖
-            with open("temp.html", "w", encoding="utf-8") as temp_file:
+            with open("front_end/temp.html", "w", encoding="utf-8") as temp_file:
                 temp_file.write(html_template)
 
             print("Checking Chrome and chromedriver paths...")
@@ -145,7 +143,8 @@ class MarkdownToImageApp(QWidget):
 
             # 执行截图
             options = {'encoding': 'utf8'}
-            imgkit.from_file('./temp.html', output_image_path, options=options)
+            css = 'front_end/styles/new.css'
+            imgkit.from_file('front_end/temp.html', output_image_path, options=options, css = css)
 
             # 检查截图是否成功保存
             if os.path.exists(output_image_path):

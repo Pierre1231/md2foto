@@ -1,0 +1,148 @@
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Markdown样式</title>
+  <style>
+    :root {
+      --side-bar-bg-color: #183055;
+      --active-file-bg-color: #2f4566;
+      --active-file-text-color: #ffffff;
+      --active-file-border-color: #757575;
+      --active-search-item-bg-color: #23242b;
+      --item-hover-bg-color: #ececec;
+      --item-hover-text-color: #000000;
+      --control-text-color: #ddd;
+      --window-border: 1px solid #183055;
+      --code-cursor: #f0f0f0;
+    }
+
+    /* 全局样式 */
+    body {
+      font-family: 'Microsoft YaHei';
+      font-weight: 500;
+      text-rendering: geometricPrecision;
+      -webkit-font-smoothing: antialiased;
+      font-size: 36px; /* 原来的 3 倍 */
+      line-height: 1; /* 适当增加行距 */
+      margin: 0 auto;
+      max-width: 1200px; /* 增加左右边距，最大宽度 1200px */
+      padding-left: 100px; /* 左边距 */
+      padding-right: 100px; /* 右边距 */
+      text-align: justify; /* **两端对齐** */
+    }
+
+    /* 主要的 Markdown 编辑区域 */
+    #write {
+      position: static;
+      width: 90%;
+      max-width: 900px;
+      line-height: 1;
+      transform: none;
+      height: auto;
+    }
+
+    /* 标题样式 */
+    #write h1 {
+      font-size: 6.6rem; /* 2.2rem * 3 */
+      font-weight: 900;
+      line-height: 1;
+      margin-top: 20px; /* 原来的 3 倍 */
+      margin-bottom: 20px;
+    }
+
+    #write h2 {
+      font-size: 6rem; /* 2rem * 3 */
+      font-weight: 900;
+      line-height: 1;
+      margin-top: 20px; /* 原来的 3 倍 */
+      margin-bottom: 20px;
+    }
+
+    #write h3 {
+      font-size: 5.4rem; /* 1.8rem * 3 */
+      font-weight: 900;
+      line-height: 1;
+      margin-top: 20px; /* 原来的 3 倍 */
+      margin-bottom: 20px;
+    }
+
+    #write h4 {
+      font-size: 4.8rem; /* 1.6rem * 3 */
+      font-weight: 900;
+      line-height: 1;
+      margin-top: 20px; /* 原来的 3 倍 */
+      margin-bottom: 20px;
+    }
+
+    #write h5 {
+      font-size: 4.2rem; /* 1.4rem * 3 */
+      font-weight: 900;
+      line-height: 1;
+      margin-top: 20px; /* 原来的 3 倍 */
+      margin-bottom: 20px;
+    }
+
+    #write h6 {
+      font-size: 3.6rem; /* 1.2rem * 3 */
+      font-weight: 900;
+      line-height: 1;
+      margin-top: 20px; /* 原来的 3 倍 */
+      margin-bottom: 20px;
+    }
+
+    /* 段落样式 */
+    p {
+      font-size: 36px; /* 原来的 3 倍 */
+      font-weight: 500;
+      line-height: 1.5;
+      color: rgb(59, 69, 78);
+    }
+
+    /* 加粗的粗度 */
+    strong {
+      font-weight: 900;
+    }
+
+    /* 无序列表 */
+    ul > li {
+      font-size: 36px; /* 原来的 3 倍 */
+      line-height: 1.5;
+    }
+
+    /* ol */
+    ol {
+      list-style-position: outside;  /* 让编号在外部 */
+      padding-left: 0;              /* 移除默认内边距 */
+      margin-left: 2em;             /* 控制左侧对齐 */
+    }
+
+
+    /* 表格样式 */
+    table {
+      font-size: 36px; /* 原来的 3 倍 */
+      line-height: 2.4;
+    }
+
+    table tr:nth-child(2n),
+    thead {
+      background-color: #f5f7f9;
+    }
+
+    /* 引用样式 */
+    blockquote {
+      position: relative;
+      padding: 3rem; /* 1rem * 3 */
+      background-color: #f5f7f9;
+      border-radius: 9px; /* 6px * 3 */
+      font-size: 36px; /* 原来的 3 倍 */
+      line-height: 1.5;
+    }
+
+
+  </style>
+</head>
+<body>
+  {{content}}
+</body>
+</html>
