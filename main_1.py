@@ -119,8 +119,6 @@ class MarkdownToImageApp(QWidget):
             # 将新的 HTML 文件保存成临时文件，若文件已存在则覆盖
             with open("temp.html", "w", encoding="utf-8") as temp_file:
                 temp_file.write(html_template)
-            with open("test/temp.html", "w", encoding="utf-8") as temp_file:
-                temp_file.write(html_template)
 
             print("Checking Chrome and chromedriver paths...")
             # 获取并检查 Chrome 和 chromedriver
