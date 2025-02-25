@@ -14,7 +14,7 @@ import imgkit
 
 import shutil
 from PyQt6.QtWidgets import (
-    QApplication, QWidget, QTextEdit, QPushButton, QVBoxLayout, QFileDialog, QLabel, QSpinBox, QHBoxLayout
+    QApplication, QWidget, QTextEdit, QPushButton, QVBoxLayout, QFileDialog, QLabel, QSpinBox, QHBoxLayout, QScrollArea
 )
 from PyQt6.QtGui import QPixmap
 from PIL import Image
@@ -42,44 +42,58 @@ class MarkdownToImageApp(QWidget):
         super().__init__()
         self.initUI()
 
-
     def initUI(self):
-        self.setWindowTitle("Markdown to Image")
+        self.setWindowTitle("Markdown 转 图片")
         self.setGeometry(100, 100, 900, 700)
 
+        # 文本编辑器
         self.textEdit = QTextEdit(self)
-        self.loadButton = QPushButton("Load Markdown File", self)
+        self.loadButton = QPushButton("加载 Markdown 文件", self)
         self.loadButton.clicked.connect(self.loadMarkdown)
 
+        # 宽度设置
         self.widthSpin = QSpinBox(self)
         self.widthSpin.setRange(400, 1600)
         self.widthSpin.setValue(800)
 
-        self.convertButton = QPushButton("Convert to Image", self)
+        # 转换按钮
+        self.convertButton = QPushButton("转换为图片", self)
         self.convertButton.clicked.connect(self.convertMarkdown)
 
-        self.savePathButton = QPushButton("Select Output Folder", self)
+        # 选择输出文件夹
+        self.savePathButton = QPushButton("选择输出文件夹", self)
         self.savePathButton.clicked.connect(self.selectOutputFolder)
 
+        # 默认输出文件夹
         self.outputFolder = os.path.join(os.getcwd(), "output")
-        self.folderLabel = QLabel(self)  # 标签显示文件夹路径
-        self.folderLabel.setText(f"Output folder: {self.outputFolder}")  # 显示默认路径
+        if not os.path.exists(self.outputFolder):
+            os.makedirs(self.outputFolder)
 
+        self.folderLabel = QLabel(self)
+        self.folderLabel.setText(f"输出文件夹: {self.outputFolder}")
+
+        # 创建带滚动条的图片显示区域
         self.imageLabel = QLabel(self)
+        self.imageLabel.setScaledContents(True)  # 图片自适应标签大小
 
+        self.scrollArea = QScrollArea(self)
+        self.scrollArea.setWidgetResizable(True)  # 窗口大小调整时自适应
+        self.scrollArea.setWidget(self.imageLabel)
+
+        # 布局设置
         layout = QVBoxLayout()
         layout.addWidget(self.textEdit)
 
         buttonLayout = QHBoxLayout()
         buttonLayout.addWidget(self.loadButton)
-        buttonLayout.addWidget(QLabel("Width:"))
+        buttonLayout.addWidget(QLabel("宽度:"))
         buttonLayout.addWidget(self.widthSpin)
         buttonLayout.addWidget(self.savePathButton)
         buttonLayout.addWidget(self.convertButton)
 
         layout.addLayout(buttonLayout)
-        layout.addWidget(self.folderLabel)  # 显示文件夹路径
-        layout.addWidget(self.imageLabel)
+        layout.addWidget(self.folderLabel)
+        layout.addWidget(self.scrollArea)  # 将滚动区域添加到布局中
 
         self.setLayout(layout)
 
